@@ -22,7 +22,8 @@ Follow the instructions below to deploy a static website:
 
 *(assuming that the domain is `example.com` and the project is located in `your/project/path` directory)*
 
-- [ ] Initialize `landorade init your/project/path`
+- [ ] Initialize `landorade init your/project/path` (This command will create a `landorade.json` configuration file)
+- [ ] Edit `landorade.json` to match your project details (e.g. domain, secret or website content folder)
 - [ ] Provision AWS infrastructure for the website `landorade provision your/project/path`
     - [ ] When `Provisioning infrastructureaws_acm_certificate_validation.cert: Still creating...` message appears on your screen- open [Route53 Hosted Zones](https://console.aws.amazon.com/route53/home#hosted-zones:) and [setup your domain to use Route53 DNS](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring.html)\*
 - [ ] Deploy your website `landorade deploy your/project/path`
