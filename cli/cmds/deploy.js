@@ -1,4 +1,5 @@
-const { S3Sync } = require('s3-asset-uploader');
+const s3 = require('s3-client');
+const pEvent = require('p-event');
 const CloudFront = require('aws-sdk/clients/cloudfront');
 const path = require('path');
 const spin = require('./utils/spin');
@@ -37,16 +38,23 @@ exports.handler = async argv => {
     deployerSecretKey
   } = await spin(applyJob, 'Reading provisioned infrastructure');
 
-  const syncJob = new S3Sync({
-    key: deployerAccessKeyId,
-    secret: deployerSecretKey,
-    bucket: deployBucket,
-  }, {
-    path: path.join(path.resolve(argv.dir), config.dist),
-    noUploadDigestFile: true,
+  const uploader = s3.createClient({
+    s3Options: {
+      accessKeyId: deployerAccessKeyId,
+      secretAccessKey: deployerSecretKey,
+    },
   });
 
-  await spin(syncJob.run(), 'Deploying website files');
+  const uploadStream = uploader.uploadDir({
+    localDir: path.join(path.resolve(argv.dir), config.dist),
+    deleteRemoved: false, // do NOT remove extraneous remote files
+    s3Params: {
+      Bucket: deployBucket,
+      Prefix: '',
+    },
+  });
+
+  await spin(pEvent(uploadStream, 'end'), 'Deploying website files');
 
   const invalidationJob = (new CloudFront()).createInvalidation({
     DistributionId: cfDistribution,
