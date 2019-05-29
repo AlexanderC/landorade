@@ -1,0 +1,9 @@
+{
+  "cfgFile": "landorade.json",
+  "defaults": {
+    "dist": "dist/",
+    "tfState": "tf-state/",
+    "domain": "example.com",
+    "secret": "this-is-my-very-secret-secret"
+  }
+}
