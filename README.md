@@ -7,7 +7,7 @@ It includes convenient tools for developing, managing and deploying SPA to AWS.
 
 - [ ] Git
 - [ ] NodeJS >= v8.x.x
-- [ ] Terraform >= v0.12.x
+- [ ] [Terraform](https://www.terraform.io) >= v0.12.x
 - [ ] AWS CLI (**configured! w/ credentials**)
 
 ## Installation
