@@ -15,5 +15,5 @@ output "deployBucket" {
 
 output "cfDistribution" {
   description = "The AWS CloudFront distribution used as CDN for the website"
-  value = "${aws_cloudfront_distribution.cdn.0.id}"
+  value = "${aws_cloudfront_distribution.cdn.*.id}"
 }

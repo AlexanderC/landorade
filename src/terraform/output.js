@@ -17,7 +17,7 @@ class OutputCommand extends ConfigAwareCommand {
   setBaseDirs(dir, namespace = 'main') {
     return this.addCmdOptions({
       state: path.join(path.resolve(dir), '.terraform-data', `${namespace}.tfstate`),
-    }).setCwd(dir);
+    });
   }
 
   /**
@@ -26,7 +26,14 @@ class OutputCommand extends ConfigAwareCommand {
   async run(...args) {
     const { stdout } = await super.run(...args);
 
-    return JSON.parse(stdout);
+    const result = {};
+    const obj = JSON.parse(stdout);
+
+    for (const key of Object.keys(obj)) {
+      result[key] = obj[key].value;
+    }
+
+    return result;
   }
 
   /**

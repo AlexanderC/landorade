@@ -25,18 +25,19 @@ exports.handler = async argv => {
 
   const config = await spin(projectConfig(argv.dir), 'Reading project configuration');
 
-  const applyJob = new TerraformOutput()
+  const outputJob = new TerraformOutput()
     .setBaseDirs(argv.dir, 'spa')
+    .setCwd(terraform.resolve('spa')) // strange TF Api...
     .authenticate(await spin(aws.credentials(), 'Obtaining AWS credentials'))
     .setup(config)
-    .run(terraform.resolve('spa'));
+    .run();
   
   const {
     deployBucket,
     cfDistribution,
     deployerAccessKeyId,
     deployerSecretKey
-  } = await spin(applyJob, 'Reading provisioned infrastructure');
+  } = await spin(outputJob, 'Reading provisioned infrastructure');
 
   const uploader = s3.createClient({
     s3Options: {
@@ -70,4 +71,5 @@ exports.handler = async argv => {
   await spin(invalidationJob, 'Invalidating CDN caches');
   
   output.info(`\n\nDeployer IAM User credentials:\nAccessKeyID=${deployerAccessKeyId}\nSecretKey=${deployerSecretKey}\n`);
+  output.info(`\nYour website is now available at: https://${config.domain}\n`);
 };

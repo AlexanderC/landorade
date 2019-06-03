@@ -28,5 +28,5 @@ exports.handler = async argv => {
   
   await spin(applyJob, 'Provisioning infrastructure');
 
-  output.info(`\n\nYou might want to deploy your website using:\n ${argv.$0} deploy ${argv.dir}`);
+  output.info(`\n\nYou might want to deploy your website using:\n ${argv.$0} deploy ${argv.dir}\n`);
 };

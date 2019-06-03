@@ -1,4 +1,8 @@
 provider "aws" {}
+provider "aws" {
+  region = "us-east-1"
+  alias = "cloudfront"
+}
 
 locals {
   www_domain = "www.${var.DOMAIN}"
@@ -122,7 +126,7 @@ resource "aws_acm_certificate" "cert" {
   domain_name = "${var.DOMAIN}"
   subject_alternative_names = ["${local.www_domain}"]
   validation_method = "DNS"
-  //provider = "aws.us-east-1" # CloudFront requires certificates in this region.
+  provider = "aws.cloudfront"
 }
 
 resource "aws_route53_record" "cert" {
@@ -142,10 +146,10 @@ resource "aws_route53_record" "cert" {
 resource "aws_acm_certificate_validation" "cert" {
   certificate_arn = "${aws_acm_certificate.cert.arn}"
   validation_record_fqdns = "${aws_route53_record.cert.*.fqdn}"
-  //provider = "aws.us-east-1" # CloudFront requires certificates in this region.
   timeouts {
     create = "2h"
   }
+  provider = "aws.cloudfront"
 }
 
 resource "aws_cloudfront_distribution" "cdn" {
