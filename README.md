@@ -14,7 +14,7 @@ It includes convenient tools for developing, managing and deploying SPA to AWS.
 
 ## Installation
 
-- Clone repository `git clone --recursive git@gitlab.titanium.codes:tools/landorade.git`
+- Clone repository `git clone --recursive git@{repository}/landorade.git`
 - Access created folder `cd landorade`
 - Install `landorade` globally `npm install -g .`
 
