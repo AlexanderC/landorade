@@ -1,4 +1,6 @@
-# Landorade - static website that makes sense
+# [WIP] Landorade - static website that makes sense
+
+**WORK IN PROGRESS**
 
 Landorade is a tool to cover whole static website life cycle from development to production.
 It includes convenient tools for developing, managing and deploying SPA to AWS.
