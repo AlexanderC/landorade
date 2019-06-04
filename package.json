@@ -6,10 +6,12 @@
   "bin": {
     "landorade": "cli/index.js"
   },
-  "scripts": {},
+  "scripts": {
+    "preinstall": "npm i -g @vapid/cli"
+  },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.titanium.codes:tools/landorade.git"
+    "url": "git+https://github.com/AlexanderC/landorade.git"
   },
   "keywords": [
     "landorade",
@@ -21,7 +23,7 @@
     "landing"
   ],
   "author": "AlexanderC <alexander.cucer@titanium-soft.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.463.0",
     "chalk": "^2.4.2",
@@ -31,6 +33,11 @@
     "p-event": "^4.1.0",
     "pify": "^4.0.1",
     "s3-client": "^4.4.2",
+    "tmp-promise": "^2.0.1",
+    "xtend": "^4.0.1",
     "yargs": "^13.2.4"
+  },
+  "peerDependencies": {
+    "@vapid/cli": "^0.8.3"
   }
 }

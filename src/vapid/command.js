@@ -1,6 +1,6 @@
 const execa = require('execa');
 const path = require('path');
-const TerraformError = require('./error/terraform-error');
+const VapidError = require('./error/vapid-error');
 
 class Command {
   /**
@@ -68,24 +68,7 @@ class Command {
   }
 
   /**
-   * Add Terraform env vars map
-   * @param {object} varsMap
-   */
-  addTerraformEnv(varsMap) {
-    const normalizedVarsMap = Object.assign({}, varsMap);
-
-    for (const key of Object.keys(normalizedVarsMap)) {
-      if (!/^TF_VAR_.*$/.test(key)) {
-        normalizedVarsMap[`TF_VAR_${key}`] = normalizedVarsMap[key];
-        delete normalizedVarsMap[key];
-      }
-    }
-
-    return this.addEnv(normalizedVarsMap);
-  }
-
-  /**
-   * Run Terraform comand
+   * Run Vapid comand
    * @param  {...any} args 
    */
   async run(...args) {
@@ -93,7 +76,7 @@ class Command {
 
     for (const key of Object.keys(this.cmdOptions)) {
       const value = this.cmdOptions[key];
-      payload.push(`-${key}="${value}"`);
+      payload.push(`--${key}="${value}"`);
     }
 
     payload.push(...args);
@@ -108,19 +91,19 @@ class Command {
 
       return { stdout, stderr };
     } catch (e) {
-      throw new TerraformError(e);
+      throw new VapidError(e);
     }
   }
 
   /**
-   * Terraform binary
+   * Vapid binary
    */
   get _bin() {
-    return 'terraform';
+    return 'vapid';
   }
 
   /**
-   * Default Terraform command options
+   * Default Vapid command options
    */
   get DEFAULT_CMD_OPTIONS() {
     return {};
