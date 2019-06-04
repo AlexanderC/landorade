@@ -26,11 +26,19 @@ Best way to develop and manage your website is using [Vapid](https://www.vapid.c
 
 > In case you DO NOT need the CMS module and just want to deploy a developed SPA- jump to `Provisioning infrastructure for the website` section below.
 
-To initialize website run: `landorade cms init your/project/path`
-
 ### Initializing the CMS module
 
-To initialize CMS module and generate basic structure
+To initialize CMS module and generate basic structure run: `landorade cms init your/project/path`
+
+### Starting CMS development server
+
+To start CMS development server run: `landorade cms start your/project/path`
+
+> You can access the website on [http://localhost:3000](http://localhost:3000) and the managing dashboard on [http://localhost:3000/dashboard/](http://localhost:3000/dashboard/)
+
+### [WIP] Build static files using CMS module
+
+*TBD*
 
 ## Provisioning infrastructure for the website
 
