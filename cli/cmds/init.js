@@ -11,6 +11,10 @@ exports.desc = 'Initialize landorade project';
 exports.builder = builder();
 
 exports.handler = async argv => {
+  const projectPath = path.resolve(argv.dir);
+
+  await fs.ensureDir(projectPath); // Create project directory if no exists
+
   const project = await spin(projectDetails(argv.dir), 'Scanning project');
 
   const { cfgFile, defaults } = config;

@@ -57,7 +57,9 @@ exports.handler = async argv => {
 
   await spin(pEvent(uploadStream, 'end'), 'Deploying website files');
 
-  const invalidationJob = (new CloudFront()).createInvalidation({
+  const cf = new CloudFront();
+
+  const invalidationJob = cf.createInvalidation({
     DistributionId: cfDistribution,
     InvalidationBatch: {
       CallerReference: `${Math.floor(new Date() / 1000)}-${deployBucket}`,
@@ -68,8 +70,15 @@ exports.handler = async argv => {
     },
   });
 
-  await spin(invalidationJob, 'Invalidating CDN caches');
-  
+  const invalidationData = await spin(invalidationJob.promise(), 'Trigger CDN cache invalidation');
+
+  const waitInvalidationJob = cf.waitFor('invalidationCompleted', {
+    DistributionId: cfDistribution,
+    Id: invalidationData.Invalidation.Id,
+  });
+
+  await spin(waitInvalidationJob.promise(), 'Waiting for CDN cache to be invalidated');
+
   output.info(`\n\nDeployer IAM User credentials:\nAccessKeyID=${deployerAccessKeyId}\nSecretKey=${deployerSecretKey}\n`);
   output.info(`\nYour website is now available at: https://${config.domain}\n`);
 };

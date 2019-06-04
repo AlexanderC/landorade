@@ -1,7 +1,5 @@
 # [WIP] Landorade - static website that makes sense
 
-**WORK IN PROGRESS**
-
 Landorade is a tool to cover whole static website life cycle from development to production.
 It includes convenient tools for developing, managing and deploying SPA to AWS.
 
@@ -22,6 +20,8 @@ It includes convenient tools for developing, managing and deploying SPA to AWS.
 
 ## Generating the website
 
+*(since Vapid official version is not supporting statical website builds, we use a fork- [https://github.com/amiller-gh/vapid](https://github.com/amiller-gh/vapid))*
+
 Best way to develop and manage your website is using [Vapid](https://www.vapid.com) CMS module.
 
 > In case you DO NOT need the CMS module and just want to deploy a developed SPA- jump to `Provisioning infrastructure for the website` section below.
@@ -34,11 +34,13 @@ To initialize CMS module and generate basic structure run: `landorade cms init y
 
 To start CMS development server run: `landorade cms start your/project/path`
 
+**In order to get guidlines on development visit [Official Docummentation](https://docs.vapid.com) webpage.**
+
 > You can access the website on [http://localhost:3000](http://localhost:3000) and the managing dashboard on [http://localhost:3000/dashboard/](http://localhost:3000/dashboard/)
 
-### [WIP] Build static files using CMS module
+### Build static files using CMS module
 
-*TBD*
+To build static files run: `landorade cms build your/project/path`
 
 ## Provisioning infrastructure for the website
 
@@ -54,6 +56,8 @@ Follow the instructions below to deploy a static website:
 > \* Without using Route53 as for managing DNS `landorade` won't be able to validate certificate, thus provisioning whole infrastructure. You'll have up to **2 hours** to validate certificate.
 
 ## Deploying the website
+
+*...before deploying, if you are using CMS module run `landorade cms build your/project/path` to build the static files first...*
 
 To deploy\* the website run `landorade deploy your/project/path`.
 
