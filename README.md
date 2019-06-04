@@ -61,7 +61,7 @@ Follow the instructions below to deploy a static website:
 
 To deploy\* the website run `landorade deploy your/project/path`.
 
-> \* By default the website is deployed from `www/` folder in the project root (`your/project/path`).
+> \* By default the website is deployed from `dist/` folder in the project root (`your/project/path`).
 
 -------------
 
