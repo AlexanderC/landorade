@@ -20,7 +20,7 @@ It includes convenient tools for developing, managing and deploying SPA to AWS.
 
 ## Generating the website
 
-*(since Vapid official version is not supporting statical website builds, we use a fork- [https://github.com/amiller-gh/vapid](https://github.com/amiller-gh/vapid))*
+*(since Vapid official version is not supporting statical website builds, we use a fork- [https://github.com/AlexanderC/vapid](https://github.com/AlexanderC/vapid))*
 
 Best way to develop and manage your website is using [Vapid](https://www.vapid.com) CMS module.
 
