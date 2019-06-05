@@ -38,7 +38,7 @@ To start CMS development server run: `landorade cms start your/project/path`
 
 > You can access the website on [http://localhost:3000](http://localhost:3000) and the managing dashboard on [http://localhost:3000/dashboard/](http://localhost:3000/dashboard/)
 
-### Build static files using CMS module
+### **[WIP]** Build static files using CMS module
 
 To build static files run: `landorade cms build your/project/path`
 
